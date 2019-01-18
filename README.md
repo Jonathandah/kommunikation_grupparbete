@@ -16,7 +16,7 @@ redigera.
 
 ● Ingen backend-koppling ska göras, men all information ska sparas i JS minnet.
 
-Extra saker:
+EXTRA SAKER:
 
 ● Man ska kunna skapa flera “boards”
 
