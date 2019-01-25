@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="src/dragAndDrop.js" defer></script>
+    <style>
+        *{margin:0px;}
+        main{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100%;
+            height: 500px;
+            background: rgb(173, 173, 173);
+        }
+        .drag-column{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 250px;
+            height: 250px;
+            background: rgb(122, 122, 122)
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="drag-column">
+            <h2>ideer</h2>
+            <ul class="list">
+                <li draggable="true">måla</li>
+                <li>träna</li>
+                <li>äta</li>
+            </ul>
+        </div>
+        <div class="drag-column">
+            <h2>Arbetar på</h2>
+            <ul>
+                <li>städa</li>
+            </ul>
+        </div>
+        <div class="drag-column">
+            <h2>färdiga</h2>
+            <ul>
+                <li>tvätta</li>
+                <li>plugga</li>
+            </ul>
+        </div>
+
+    </main>
+</body>
+</html>
