@@ -22,6 +22,11 @@ li{
 li:hover{
     cursor: pointer;
 }
-li .over{
+li.over{
     border: 2px dashed black;
+}
+
+.drop__element{ /*test*/
+    opacity: 0.4;
+    border: 1px dashed red;
 }
