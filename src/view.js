@@ -1,9 +1,9 @@
 export default{
-    renderDom: function(value){
+    renderDom: function(value){ //render dom, behövs den ens?
 
     },
 
-    renderList: function(card){
+    renderInput: function(card, addList){ //renderar input fieldet för att lägga till items.
         let inputArea = document.createElement("div");
         let ul = document.createElement("ul");
         let textfield = document.createElement("input");
@@ -15,9 +15,20 @@ export default{
 
         addItem.textContent = "Add Item";
 
+        addItem.addEventListener("click", addList);
+
         inputArea.appendChild(ul);
         inputArea.appendChild(textfield);
         inputArea.appendChild(addItem);
         card.appendChild(inputArea);
-    }
+    }, 
+
+    renderList: function(ul){ //läger till items
+        let li = document.createElement("li");
+        let deleteButton = document.createElement("button");
+
+        li.textContent = "";
+    },
+
+
 }
