@@ -55,9 +55,9 @@ function dragEnd(e) {
         li.classList.remove("over");
     }    
   }
-
-
 */
+
+
 var dragSrcEl = null;
 function handleDragStart(e) {
     this.style.opacity = '0.4';  //elementet användaren håller i 
