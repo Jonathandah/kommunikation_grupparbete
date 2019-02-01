@@ -8,7 +8,14 @@ function addInput(){ // hanterar add input
 }
 
 function addList (){ // hanterar items
+    
 
+    let object = {
+        value: view.inputValue,
+        itemDate: "",
+    }
+
+    model.getDate(object);
 }
 
 let listButton = document.querySelector(".addList");

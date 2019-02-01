@@ -1,4 +1,6 @@
 export default{
+
+    inputValue: undefined,
     renderDom: function(value){ //render dom, behövs den ens?
 
     },
@@ -16,6 +18,8 @@ export default{
         addItem.textContent = "Add Item";
 
         addItem.addEventListener("click", addList);
+
+        this.inputValue = textfield.value;
 
         inputArea.appendChild(ul);
         inputArea.appendChild(textfield);
