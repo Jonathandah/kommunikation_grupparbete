@@ -3,15 +3,9 @@ export default{
 
     getDate: function(object){ //sätter datum
         let setDate = new Date;
+        let date = setDate.toLocaleDateString
 
-        let year = setDate.getFullYear;
-        let month = setDate.getMonth;
-        let day = setDate.getUTCDay;
-        let hour = setDate.getUTCHours;
-        let minute = setDate.getMinutes;
-
-        object.itemDate.textContent = year + "/" + month + "/" + day + "-" + hour + ":" + minute;
-        
+        object.itemDate = date; // inte säker på att den funkar som jag vill?
         console.log(object.itemDate);
         this.array.push(object);
     }

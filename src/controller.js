@@ -7,16 +7,14 @@ function addInput(){ // hanterar add input
     view.renderInput(div, addList);
 }
 
-function addList (){ // hanterar items
-    
+let inputtButton = document.querySelector(".addList");
+inputtButton.addEventListener("click", addInput);
 
+
+function addList (){ // hanterar items
     let object = {
         value: view.inputValue,
-        itemDate: "",
+        itemDate: undefined,
     }
-
     model.getDate(object);
 }
-
-let listButton = document.querySelector(".addList");
-listButton.addEventListener("click", addList);
