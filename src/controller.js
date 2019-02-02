@@ -12,9 +12,11 @@ inputtButton.addEventListener("click", addInput);
 
 
 function addList (){ // hanterar items
+    let itemValue = document.querySelector(".addItem__input").value; // borde denna selectas i controllern?
     let object = {
-        value: view.inputValue,
+        value: itemValue,
         itemDate: undefined,
     }
     model.getDate(object);
+    view.renderList(model.array);
 }
