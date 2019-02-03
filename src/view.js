@@ -59,9 +59,10 @@ export default{
             this.ul.appendChild(li);
         }
     },
-
-    deleteItem: function (array){
-
-
+    
+    deleteItem: function (array, target){
+        console.log(target);
+        console.log(target.parentNode);
+        target.parentNode.parentNode.removeChild(target.parentNode); // denna funktionern kanske borde köras på arrayen i modellen istället ? // behöver en random id-generator för att kanppen ska hålla koll påå rätt objekt
     },
 }

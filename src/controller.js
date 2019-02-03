@@ -21,6 +21,6 @@ function addList (){ // hanterar items
     view.renderItem(model.array, eraise);
 }
 
-function eraise (){
-    console.log("delete");
+function eraise (e){
+    view.deleteItem(model.array, e.target);
 }
