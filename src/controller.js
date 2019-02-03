@@ -18,5 +18,9 @@ function addList (){ // hanterar items
         itemDate: undefined,
     }
     model.getDate(object);
-    view.renderList(model.array);
+    view.renderItem(model.array, eraise);
+}
+
+function eraise (){
+    console.log("delete");
 }

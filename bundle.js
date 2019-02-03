@@ -66,7 +66,7 @@
             card.appendChild(inputArea);
         }, 
 
-        renderList: function(array){ //läger till items
+        renderItem: function(array, deleteFunction){ //läger till items
             console.log(this.ul);
             console.log(array);
             
@@ -81,16 +81,20 @@
 
                 h2.textContent = obj.value + " - " + obj.itemDate;
                 deleteButton.textContent = "X";
+
+                deleteButton.addEventListener("click", deleteFunction);
             
                 li.appendChild(h2);
-                li.appendChild(deleteButton);
                 li.appendChild(textArea);
+                li.appendChild(deleteButton);
+                
                 this.ul.appendChild(li);
             }
-            
-            
+        },
 
-            
+        deleteItem: function (array){
+
+
         },
     };
 
@@ -110,7 +114,11 @@
             itemDate: undefined,
         };
         model.getDate(object);
-        view.renderList(model.array);
+        view.renderItem(model.array, eraise);
+    }
+
+    function eraise (){
+        console.log("delete");
     }
 
 }());
