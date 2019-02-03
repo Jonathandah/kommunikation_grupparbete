@@ -59,29 +59,33 @@
             this.ul = ul;
             //this.inputValue = textfield.value; //tror att jag vill ha något liknande i renderList-funktionen istället
 
-            inputArea.appendChild(ul);
+            
             inputArea.appendChild(textfield);
             inputArea.appendChild(addItem);
+            inputArea.appendChild(ul);
             card.appendChild(inputArea);
         }, 
 
         renderList: function(array){ //läger till items
             console.log(this.ul);
             console.log(array);
-
+            
+            this.ul.innerHTML = "";
             for(let obj of array){
+              
+                
                 let li = document.createElement("li");  //styling för items 
                 let h2 = document.createElement("h2");
                 let deleteButton = document.createElement("button");
                 let textArea = document.createElement("textarea");
+
+                h2.textContent = obj.value + " - " + obj.itemDate;
                 deleteButton.textContent = "X";
-
+            
+                li.appendChild(h2);
                 li.appendChild(deleteButton);
-
-
-                for(let key in obj){
-                    li.textContent = "";
-                }
+                li.appendChild(textArea);
+                this.ul.appendChild(li);
             }
             
             
