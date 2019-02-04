@@ -3,10 +3,6 @@ export default{
 
     inputValue: undefined, // osöker på om den ska få sitt värde från modellen eller controllern !!
 
-    renderDom: function(value){ //render dom, behövs den ens?
-
-    },
-
     renderInput: function(card, addList){ //renderar input fieldet för att lägga till items.
         let inputArea = document.createElement("div");
         let ul = document.createElement("ul");
