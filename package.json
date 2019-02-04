@@ -1,0 +1,23 @@
+{
+  "name": "kommunikation_grupparbete",
+  "version": "1.0.0",
+  "description": "Uppgift",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jonathandah/kommunikation_grupparbete.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jonathandah/kommunikation_grupparbete/issues"
+  },
+  "homepage": "https://github.com/Jonathandah/kommunikation_grupparbete#readme",
+  "dependencies": {
+    "mocha": "^5.2.0",
+    "rollup": "^1.1.2"
+  }
+}

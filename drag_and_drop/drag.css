@@ -1,0 +1,32 @@
+*{margin:0px;}
+main{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    height: 500px;
+    background: rgb(173, 173, 173);
+}
+.drag-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 250px;
+    background: rgb(122, 122, 122)
+}
+li{
+    list-style: none;
+}
+li:hover{
+    cursor: pointer;
+}
+li.over{
+    border: 2px dashed black;
+}
+
+.drop__element{ /*test*/
+    opacity: 0.4;
+    border: 1px dashed red;
+}
