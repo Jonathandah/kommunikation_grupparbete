@@ -1,0 +1,78 @@
+
+body {
+  background: #0079BF;
+  margin: 0px;
+}
+
+h1 {
+  font-size: 1.3em;
+  color: white;
+}
+
+.list-container {
+  display: flex;
+  flex: row nowrap;
+  align-items: flex-start;
+}
+
+.list {
+  background: #E2E4E6;
+}
+
+.list-dimension {
+  border-radius: 3px;
+  margin: 10px;
+  width: 300px;
+}
+
+.list-header {
+  margin: 10px 10px -10px;
+  padding: 0;
+  font-size: 1em;
+  font-weight: bold;
+  color: black;
+}
+
+.list-inner-scroll {
+  padding: 0;
+  list-style-type: none;
+  margin-top: 10px;
+  margin-bottom: 0;
+  max-height: 400px;
+  overflow: scroll;
+}
+.list-item {
+  background: white;
+  margin: 10px;
+  margin-bottom: 0;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.add-list-button {
+  padding: 10px;
+  background-color: #006BA9;
+  /* height: 19px; */
+  text-align: left;
+  font-size: 0.9em;
+  color: #B3D3E5;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.add-card-button {
+  display: block;
+  font-size: 0.9em;
+  padding: 10px;
+  color: #8C8C8C;
+  border: none;
+  background-color: transparent;
+}
+
+.headez {
+  padding: 2px;
+  text-align: center;
+  background:#01A9DB;
+  color: white;
+  font-size: 25px;
+}
