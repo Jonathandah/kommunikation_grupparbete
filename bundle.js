@@ -96,18 +96,72 @@
         },
     };
 
+    var test = {
+        renderDom: function (testFunction){
+            let main = document.querySelector("main");
+        
+            let container = document.createElement("div");
+        
+            let container__listbox = document.createElement("div");
+        
+            let container__toolbox = document.createElement("div");
+        
+            let container__button = document.createElement("button");
+        
+            container.classList.add("container");
+            container__listbox.classList.add("container__listbox");
+            container__toolbox.classList.add("container__toolbox");
+            container__button.classList.add("listContainer__button");
+        
+            container__button.textContent = "Add List";
+            container__button.addEventListener("click", testFunction);
+        
+            container__toolbox.appendChild(container__button);
+            container.appendChild(container__toolbox);
+            container.appendChild(container__listbox);
+            main.appendChild(container);    
+        },
+
+        renderList: function (addinput){
+            let container__listbox = document.querySelector(".container__listbox");
+            console.log("HEj");
+            let listArea = document.createElement("div");
+            let addItem = document.createElement("button");
+            let list = document.createElement("div");
+        
+            addItem.textContent = "+";
+        
+            listArea.classList.add("listArea");
+            addItem.classList.add("addItem");
+            list.classList.add("list");
+            
+            addItem.addEventListener("click", addinput);
+
+            listArea.appendChild(addItem);
+            listArea.appendChild(list);
+        
+            container__listbox.appendChild(listArea);
+        },
+    };
+
+    test.renderDom(handleTest);
+    function handleTest(){
+        console.log("handletest");
+        test.renderList(addInput);
+    }
+
     function addInput(){ // hanterar add input 
         let div = document.querySelector("div");
         view.renderInput(div, addList);
     }
 
-    let inputtButton = document.querySelector(".addList");
+    /*
+    let inputtButton = document.querySelector(".addItem");
     inputtButton.addEventListener("click", addInput);
-
+     */
 
     function addList (){ // hanterar items
         let itemValue = view.input.value; // borde denna selectas i controllern?
-        
         let object = {
             id: undefined,
             value: itemValue,
