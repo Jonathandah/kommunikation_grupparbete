@@ -1,29 +1,30 @@
 export default{
     ul: undefined,
 
-    inputValue: undefined, // osöker på om den ska få sitt värde från modellen eller controllern !!
+    input: undefined, // osöker på om den ska få sitt värde från modellen eller controllern !!
 
     renderInput: function(card, addList){ //renderar input fieldet för att lägga till items.
         let inputArea = document.createElement("div");
         let ul = document.createElement("ul");
-        let textfield = document.createElement("input");
+        let input = document.createElement("input");
         let addItem = document.createElement("button");
 
         ul.setAttribute("style", "list-style: none;");
-        textfield.setAttribute("style", "");
+        input.setAttribute("style", "");
         addItem.setAttribute("style", "border-radios: 4px;")
 
-        textfield.classList.add("addItem__input");
+        input.classList.add("addItem__input");
         ul.classList.add("itemList");
 
         addItem.textContent = "Add Item";
 
         addItem.addEventListener("click", addList);
-
+        
+        this.input = input;
         this.ul = ul;
-        //this.inputValue = textfield.value; //tror att jag vill ha något liknande i renderList-funktionen istället
+        //this.inputValue = input.value; //tror att jag vill ha något liknande i renderList-funktionen istället
 
-        inputArea.appendChild(textfield);
+        inputArea.appendChild(input);
         inputArea.appendChild(addItem);
         inputArea.appendChild(ul);
         card.appendChild(inputArea);
@@ -46,14 +47,13 @@ export default{
             h2.textContent = obj.value + " - " + obj.itemDate;
             deleteButton.textContent = "X";
 
-            deleteButton.addEventListener("click", deleteFunction);
+            deleteButton.id = obj.id;
 
-            deleteButton.id =obj.id;
+            deleteButton.addEventListener("click", deleteFunction);
         
             li.appendChild(h2);
             li.appendChild(textArea);
             li.appendChild(deleteButton);
-            
             this.ul.appendChild(li);
         }
     },
