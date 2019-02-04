@@ -39,6 +39,7 @@
                     console.log(this.array[obj].id);
                     console.log(obj);
                     this.array.splice(obj, 1);
+                    //kolla igenom sen; fixes?
                 }
             }
         }
@@ -60,7 +61,7 @@
             let textfield = document.createElement("input");
             let addItem = document.createElement("button");
 
-            ul.setAttribute("style", "");
+            ul.setAttribute("style", "list-style: none;");
             textfield.setAttribute("style", "");
             addItem.setAttribute("style", "border-radios: 4px;");
 
@@ -92,6 +93,8 @@
                 let deleteButton = document.createElement("button");
                 let textArea = document.createElement("textarea");
 
+                textArea.setAttribute("rows", "10");
+
                 h2.textContent = obj.value + " - " + obj.itemDate;
                 deleteButton.textContent = "X";
 
@@ -105,12 +108,6 @@
                 
                 this.ul.appendChild(li);
             }
-        },
-        
-        deleteItem: function (array, target){
-            console.log(target);
-            console.log(target.parentNode);
-            target.parentNode.parentNode.removeChild(target.parentNode); // denna funktionern kanske borde köras på arrayen i modellen istället ? // behöver en random id-generator för att kanppen ska hålla koll påå rätt objekt
         },
     };
 
@@ -139,7 +136,6 @@
     function eraise (e){
         model.deleteObj(e.target.id);
         view.renderItem(model.array, eraise);
-
     }
 
 }());

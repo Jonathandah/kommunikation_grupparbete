@@ -27,5 +27,4 @@ function addList (){ // hanterar items
 function eraise (e){
     model.deleteObj(e.target.id);
     view.renderItem(model.array, eraise);
-
 }
