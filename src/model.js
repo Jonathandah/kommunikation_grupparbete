@@ -1,6 +1,5 @@
 export default{
     array:[],
-
     getDate: function(object){ //sätter datum
         /*
         let setDate = new Date;
@@ -23,6 +22,23 @@ export default{
        console.log(object.itemDate);
 
        this.array.push(object); // vill man att nycklar ska vara beroende av varandra??
+    },
+
+    idGenerater: function(object){
+        let number = Math.floor(Math.random() * 1000);
+        object.id = object.value + number;
+    },
+
+    deleteObj: function(target){
+        console.log(target);
+        for(let obj in this.array){
+            if(target === this.array[obj].id){
+                console.log(this.array[obj].id);
+                console.log(obj);
+                this.array.splice(obj, 1);
+                //kolla igenom sen; fixes?
+            }
+        }
     }
 
 }

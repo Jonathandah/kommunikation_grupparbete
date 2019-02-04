@@ -27,7 +27,6 @@ export default{
         this.ul = ul;
         //this.inputValue = textfield.value; //tror att jag vill ha något liknande i renderList-funktionen istället
 
-        
         inputArea.appendChild(textfield);
         inputArea.appendChild(addItem);
         inputArea.appendChild(ul);
@@ -40,8 +39,7 @@ export default{
         
         this.ul.innerHTML = "";
         for(let obj of array){
-          
-            
+        
             let li = document.createElement("li");  //styling för items 
             let h2 = document.createElement("h2");
             let deleteButton = document.createElement("button");
@@ -51,6 +49,8 @@ export default{
             deleteButton.textContent = "X";
 
             deleteButton.addEventListener("click", deleteFunction);
+
+            deleteButton.id =obj.id;
         
             li.appendChild(h2);
             li.appendChild(textArea);

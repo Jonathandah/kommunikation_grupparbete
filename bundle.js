@@ -3,7 +3,6 @@
 
     var model = {
         array:[],
-
         getDate: function(object){ //sätter datum
             /*
             let setDate = new Date;
@@ -26,6 +25,22 @@
            console.log(object.itemDate);
 
            this.array.push(object); // vill man att nycklar ska vara beroende av varandra??
+        },
+
+        idGenerater: function(object){
+            let number = Math.floor(Math.random() * 1000);
+            object.id = object.value + number;
+        },
+
+        deleteObj: function(target){
+            console.log(target);
+            for(let obj in this.array){
+                if(target === this.array[obj].id){
+                    console.log(this.array[obj].id);
+                    console.log(obj);
+                    this.array.splice(obj, 1);
+                }
+            }
         }
 
     };
@@ -59,7 +74,6 @@
             this.ul = ul;
             //this.inputValue = textfield.value; //tror att jag vill ha något liknande i renderList-funktionen istället
 
-            
             inputArea.appendChild(textfield);
             inputArea.appendChild(addItem);
             inputArea.appendChild(ul);
@@ -72,8 +86,7 @@
             
             this.ul.innerHTML = "";
             for(let obj of array){
-              
-                
+            
                 let li = document.createElement("li");  //styling för items 
                 let h2 = document.createElement("h2");
                 let deleteButton = document.createElement("button");
@@ -83,6 +96,8 @@
                 deleteButton.textContent = "X";
 
                 deleteButton.addEventListener("click", deleteFunction);
+
+                deleteButton.id =obj.id;
             
                 li.appendChild(h2);
                 li.appendChild(textArea);
@@ -111,15 +126,20 @@
     function addList (){ // hanterar items
         let itemValue = document.querySelector(".addItem__input").value; // borde denna selectas i controllern?
         let object = {
+            id: undefined,
             value: itemValue,
             itemDate: undefined,
         };
         model.getDate(object);
+        model.idGenerater(object);
         view.renderItem(model.array, eraise);
     }
 
+
     function eraise (e){
-        view.deleteItem(model.array, e.target);
+        model.deleteObj(e.target.id);
+        view.renderItem(model.array, eraise);
+
     }
 
 }());
