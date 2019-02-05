@@ -64,7 +64,6 @@
             let addItem = document.createElement("button");
 
             ul.setAttribute("style", "list-style: none;");
-            input.setAttribute("style", "");
             addItem.setAttribute("style", "border-radios: 4px;");
           
             input.classList.add("addItem__input");

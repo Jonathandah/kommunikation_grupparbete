@@ -35,7 +35,8 @@ function addList (e){ // hanterar items
         value: itemValue,
         itemDate: undefined,
     }
-    console.log(listId);
+ 
+    
     model.getDate(object);
     model.idGenerater(object);
     model.sortItems(object);
