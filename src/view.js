@@ -3,7 +3,9 @@ export default{
 
     input: undefined, // osöker på om den ska få sitt värde från modellen eller controllern !!
 
-    renderInput: function(card, addList){ //renderar input fieldet för att lägga till items.
+    renderInput: function(target, addList){ //renderar input fieldet för att lägga till items.
+        let objId = target.parentElement.classList[1]; //list id
+
         let inputArea = document.createElement("div");
         let ul = document.createElement("ul");
         let input = document.createElement("input");
@@ -12,8 +14,9 @@ export default{
         ul.setAttribute("style", "list-style: none;");
         input.setAttribute("style", "");
         addItem.setAttribute("style", "border-radios: 4px;")
-
+      
         input.classList.add("addItem__input");
+        addItem.classList.add(objId);
         ul.classList.add("itemList");
 
         addItem.textContent = "Add Item";
@@ -27,16 +30,16 @@ export default{
         inputArea.appendChild(input);
         inputArea.appendChild(addItem);
         inputArea.appendChild(ul);
-        card.appendChild(inputArea);
+        target.parentElement.appendChild(inputArea);
     }, 
 
-    renderItem: function(array, deleteFunction){ //läger till items
+    renderItem: function(listObj, target, deleteFunction){ //läger till items
         console.log(this.ul);
-        console.log(array);
-        
+        console.log(listObj);
+        console.log(target);
         this.ul.innerHTML = "";
-        for(let obj of array){
-        
+        for(let obj in listObj.value){
+            let x = listObj.value[obj];
             let li = document.createElement("li");  //styling för items 
             let h2 = document.createElement("h2");
             let deleteButton = document.createElement("button");
@@ -44,7 +47,7 @@ export default{
 
             textArea.setAttribute("rows", "10");
 
-            h2.textContent = obj.value + " - " + obj.itemDate;
+            h2.textContent = x.value + " - " + x.itemDate;
             deleteButton.textContent = "X";
 
             deleteButton.id = obj.id;
@@ -54,7 +57,7 @@ export default{
             li.appendChild(h2);
             li.appendChild(textArea);
             li.appendChild(deleteButton);
-            this.ul.appendChild(li);
+            target.parentElement.appendChild(li);
         }
     },
 }

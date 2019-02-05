@@ -5,13 +5,19 @@ import test from "./test.js"; //test för framtida problem
 
 test.renderDom(handleTest); //test-version
 function handleTest(){
-    console.log("handletest")
-    test.renderList(addInput);
+
+    let listObject = {
+        id: undefined,
+        value: [],
+    }
+
+    model.idGenerater(listObject);
+    test.renderList(addInput, listObject);
+    model.array.push(listObject);
 }
 
-function addInput(){ // hanterar add input 
-    let div = document.querySelector("div");
-    view.renderInput(div, addList);
+function addInput(e){ // hanterar add input 
+    view.renderInput(e.target, addList);
 }
 
 /*
@@ -19,18 +25,22 @@ let inputtButton = document.querySelector(".addItem");
 inputtButton.addEventListener("click", addInput);
  */
 
-function addList (){ // hanterar items
+function addList (e){ // hanterar items
     let itemValue = view.input.value; // borde denna selectas i controllern?
-    view.input
+    let listId = e.target.classList[0];
+
     let object = {
+        class: listId,
         id: undefined,
         value: itemValue,
         itemDate: undefined,
     }
-
+    console.log(listId);
     model.getDate(object);
     model.idGenerater(object);
-    view.renderItem(model.array, eraise);
+    model.sortItems(object);
+    
+    view.renderItem(model.findObj(listId), e.target, eraise);
 }
 
 

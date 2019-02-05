@@ -27,7 +27,7 @@ export default{
         main.appendChild(container);    
     },
 
-    renderList: function (addinput){
+    renderList: function (addinput , object){
         let container__listbox = document.querySelector(".container__listbox");
         let listArea = document.createElement("div");
         let addItem = document.createElement("button");
@@ -36,7 +36,9 @@ export default{
         addItem.textContent = "+";
     
         listArea.classList.add("listArea");
+        listArea.classList.add(object.id);
         addItem.classList.add("addItem");
+        addItem.classList.add(object.id);
         list.classList.add("list");
         
         this.currentListArea = listArea

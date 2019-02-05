@@ -1,6 +1,22 @@
 export default{
     array:[],
 
+    findObj: function (target){
+        for(let list of this.array){
+            if(list.id === target){
+                return list;
+            }
+        }
+    },
+    sortItems: function(obj){
+        for(let list of this.array){
+            if(list.id === obj.class){
+                list.value.push(obj);
+            }
+        }
+
+        console.log(this.array);
+    },
     getDate: function(object){ //sätter datum
        let today = new Date();
        let dd = today.getDate();
@@ -9,14 +25,13 @@ export default{
 
        let date = yyyy + "/" + mm + "/" + dd;
 
-       object.itemDate = date;
-
-       this.array.push(object); // vill man att nycklar ska vara beroende av varandra??
+       object.itemDate = date;// vill man att nycklar ska vara beroende av varandra??
     },
 
     idGenerater: function(object){
         let number = Math.floor(Math.random() * 1000);
-        object.id = object.value + number;
+        object.id = number.toString();
+        console.log(object);
     },
 
     deleteObj: function(target){

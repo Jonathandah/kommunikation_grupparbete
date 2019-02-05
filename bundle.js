@@ -4,6 +4,22 @@
     var model = {
         array:[],
 
+        findObj: function (target){
+            for(let list of this.array){
+                if(list.id === target){
+                    return list;
+                }
+            }
+        },
+        sortItems: function(obj){
+            for(let list of this.array){
+                if(list.id === obj.class){
+                    list.value.push(obj);
+                }
+            }
+
+            console.log(this.array);
+        },
         getDate: function(object){ //sätter datum
            let today = new Date();
            let dd = today.getDate();
@@ -12,14 +28,13 @@
 
            let date = yyyy + "/" + mm + "/" + dd;
 
-           object.itemDate = date;
-
-           this.array.push(object); // vill man att nycklar ska vara beroende av varandra??
+           object.itemDate = date;// vill man att nycklar ska vara beroende av varandra??
         },
 
         idGenerater: function(object){
             let number = Math.floor(Math.random() * 1000);
-            object.id = object.value + number;
+            object.id = number.toString();
+            console.log(object);
         },
 
         deleteObj: function(target){
@@ -40,7 +55,9 @@
 
         input: undefined, // osöker på om den ska få sitt värde från modellen eller controllern !!
 
-        renderInput: function(card, addList){ //renderar input fieldet för att lägga till items.
+        renderInput: function(target, addList){ //renderar input fieldet för att lägga till items.
+            let objId = target.parentElement.classList[1]; //list id
+
             let inputArea = document.createElement("div");
             let ul = document.createElement("ul");
             let input = document.createElement("input");
@@ -49,8 +66,9 @@
             ul.setAttribute("style", "list-style: none;");
             input.setAttribute("style", "");
             addItem.setAttribute("style", "border-radios: 4px;");
-
+          
             input.classList.add("addItem__input");
+            addItem.classList.add(objId);
             ul.classList.add("itemList");
 
             addItem.textContent = "Add Item";
@@ -64,16 +82,16 @@
             inputArea.appendChild(input);
             inputArea.appendChild(addItem);
             inputArea.appendChild(ul);
-            card.appendChild(inputArea);
+            target.parentElement.appendChild(inputArea);
         }, 
 
-        renderItem: function(array, deleteFunction){ //läger till items
+        renderItem: function(listObj, target, deleteFunction){ //läger till items
             console.log(this.ul);
-            console.log(array);
-            
+            console.log(listObj);
+            console.log(target);
             this.ul.innerHTML = "";
-            for(let obj of array){
-            
+            for(let obj in listObj.value){
+                let x = listObj.value[obj];
                 let li = document.createElement("li");  //styling för items 
                 let h2 = document.createElement("h2");
                 let deleteButton = document.createElement("button");
@@ -81,7 +99,7 @@
 
                 textArea.setAttribute("rows", "10");
 
-                h2.textContent = obj.value + " - " + obj.itemDate;
+                h2.textContent = x.value + " - " + x.itemDate;
                 deleteButton.textContent = "X";
 
                 deleteButton.id = obj.id;
@@ -91,12 +109,15 @@
                 li.appendChild(h2);
                 li.appendChild(textArea);
                 li.appendChild(deleteButton);
-                this.ul.appendChild(li);
+                target.parentElement.appendChild(li);
             }
         },
     };
 
     var test = {
+
+        currentListArea: undefined ,
+
         renderDom: function (testFunction){
             let main = document.querySelector("main");
         
@@ -122,9 +143,8 @@
             main.appendChild(container);    
         },
 
-        renderList: function (addinput){
+        renderList: function (addinput , object){
             let container__listbox = document.querySelector(".container__listbox");
-            console.log("HEj");
             let listArea = document.createElement("div");
             let addItem = document.createElement("button");
             let list = document.createElement("div");
@@ -132,9 +152,13 @@
             addItem.textContent = "+";
         
             listArea.classList.add("listArea");
+            listArea.classList.add(object.id);
             addItem.classList.add("addItem");
+            addItem.classList.add(object.id);
             list.classList.add("list");
             
+            this.currentListArea = listArea;
+
             addItem.addEventListener("click", addinput);
 
             listArea.appendChild(addItem);
@@ -144,15 +168,21 @@
         },
     };
 
-    test.renderDom(handleTest);
+    test.renderDom(handleTest); //test-version
     function handleTest(){
-        console.log("handletest");
-        test.renderList(addInput);
+
+        let listObject = {
+            id: undefined,
+            value: [],
+        };
+
+        model.idGenerater(listObject);
+        test.renderList(addInput, listObject);
+        model.array.push(listObject);
     }
 
-    function addInput(){ // hanterar add input 
-        let div = document.querySelector("div");
-        view.renderInput(div, addList);
+    function addInput(e){ // hanterar add input 
+        view.renderInput(e.target, addList);
     }
 
     /*
@@ -160,17 +190,22 @@
     inputtButton.addEventListener("click", addInput);
      */
 
-    function addList (){ // hanterar items
+    function addList (e){ // hanterar items
         let itemValue = view.input.value; // borde denna selectas i controllern?
+        let listId = e.target.classList[0];
+
         let object = {
+            class: listId,
             id: undefined,
             value: itemValue,
             itemDate: undefined,
         };
-
+        console.log(listId);
         model.getDate(object);
         model.idGenerater(object);
-        view.renderItem(model.array, eraise);
+        model.sortItems(object);
+        
+        view.renderItem(model.findObj(listId), e.target, eraise);
     }
 
 
