@@ -1,68 +1,35 @@
-let container = document.getElementById("list-container");
-let addListBtn = document.getElementById("addlist-btn");
-let saveListBtn = document.getElementById("save-btn");
-let saveListBox = document.getElementById("save-list-box");
-let listInputBox = document.getElementById("list-input-box");
-let textValue;
+let container = document.getElementsByClassName('.container');
+let addlist = document.getElementById('add-a-list-btn');
+let listbox = document.getElementById('save-listbox');
 
-let data = {
-    lists: []
-};
 
-function addList() {
-    saveListBox.style.display = "inline-block";
-    addListBtn.style.display = "none";
+
+
+function createlist(){
+  let div = document.createElement("div");
+  let box = document.createElement('div');
+  let listinput = document.createElement('input');
+  let savebt = document.createElement('button');
+  let addlist = document.createElement('button');
+  savebt.innerHTML = "Save";
+
+
+  div.classList.add("container");
+  box.classList.add("save-list-box");
+  listinput.classList.add("input");
+  savebt.classList.add("savebtn");
+  console.log(div);
+
+  div.setAttribute("style", "display: grid");
+  div.appendChild(box);
+  box.appendChild(listinput);
+  box.appendChild(savebt);
+  main.appendChild(div);/* den reggar inte eller så skrev jag fel */
+
+
+  savebt.addEventListener("click", function () {
+    let inputhide = document.getElementsByClassName("input").value;
+    let div = document.getElementsByClassName('.input__hide').value;
+    console.log("hej");
+  });
 }
-
-function createList(textValue) {
-    if (textValue) {
-        let divone = document.createElement("div"),
-            listTitle = document.createElement("div"),
-            title = document.createElement("div"),
-            dotIcon = document.createElement("a"),
-            newTextNode = document.createTextNode(textValue),
-            addCardLink = document.createElement("a"),
-            addText = document.createTextNode("Add a card..."),
-            lists,
-            x,
-            y;
-
-        data.lists.push({
-            title: textValue,
-            cards: []
-        });
-
-        lists = data.lists.map(function (text) {
-            return text;
-        });
-
-        for (x = 0; x < lists.length; x += 1) {
-
-            title.appendChild(newTextNode);
-            listTitle.setAttribute("class", "list-title");
-            listTitle.appendChild(title);
-            divone.style.cssFloat = "left";
-            divone.style.display = "inline-block";
-            divone.appendChild(listTitle);
-            divone.appendChild(addCardLink);
-            container.insertBefore(divone, addListBtn);
-            addListBtn.style.display = "inline-block";
-            saveListBox.style.display = "none";
-            listInputBox.value = "";
-
-
-
-        }
-    }
-}
-
-window.addEventListener("load", function () {
-    addListBtn.addEventListener("click", function () {
-        addList();
-    });
-
-    saveListBtn.addEventListener("click", function () {
-        textValue = listInputBox.value;
-        createList(textValue);
-    });
-});

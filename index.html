@@ -16,14 +16,18 @@
     </header>
     <main>
       <div class="headez">
-          </div>
-           <div id="list-container">
-              <div id="addlist-btn">Add a list...</div>
-                <div id="save-list-box">
-                  <input id="list-input-box" placeholder="Add a list..." />
-                  <button type="button" id="save-btn">Save</button>
+        </div>
+          <div class="input__hide">
+            </div>
+              <button onclick = "createlist()" type="button" name="button">New List</button>
+               <div class="display" style="display:none">
+                <div class="container">
+                 <div class="save-list-box">
+                  <input class="input" placeholder="Add a list..." />
+                <button onclick="newlist()"type="button" class="savebtn">Save</button>
               </div>
-         </div>
-    </main>
+            </div>
+          </div>
+      </main> <!-- reggar inte min Appendchild (kolla main.js)-->
 </body>
 </html>
