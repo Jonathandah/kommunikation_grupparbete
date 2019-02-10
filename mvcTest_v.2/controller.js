@@ -91,8 +91,15 @@ function addList (e){ // hanterar items
 
 
 function eraise (e){
-    model.deleteObj(e.target.id, e.target.classList.value);
-    console.log(e.currentTarget.parentNode.id);
-    view.renderItem(model.findObj(e.target.id), eraise);
+  /*
+    model.deleteObj(e.target.id, e.target.classList[1]);
+    console.log(e.target.id);
+    console.log(model.findObj(e.target.id));
+    view.renderItem(model.findObj(e.target.classList[1]), e.target, eraise, handleDragStart, handleDragEnter, handleDragLeave, handleDragEnd);
     //view.deleteItem(e);
+    */
+   model.deleteObj(e.target.id, e.target.classList[1]);
+   console.log(e.currentTarget.parentNode.id);
+   //view.renderItem(model.findObj(e.target.id), eraise);
+   view.deleteItem(e);
 }

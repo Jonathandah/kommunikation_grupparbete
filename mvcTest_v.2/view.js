@@ -4,7 +4,7 @@ export default{
     obj:undefined,
     ulArray: [],
      // osöker på om den ska få sitt värde från modellen eller controllern !!
-    
+
     renderDom: function (main, testFunction){
     
         let container = document.createElement("div");
@@ -78,7 +78,7 @@ export default{
         this.container__listbox.appendChild(listArea);
     },
     renderItem: function(object, target, deleteFunction, handleDragStart, handleDragEnter, handleDragLeave, handleDragEnd){ //läger till items
-
+            console.log(object);
             let li = document.createElement("li");  //styling för items 
             let h2 = document.createElement("h2");
             let deleteButton = document.createElement("button");
@@ -88,6 +88,7 @@ export default{
 
             li.id = object.id;
             deleteButton.id = object.id;
+            deleteButton.classList.add("deleteItem");
             deleteButton.classList.add(object.class);
             
 
@@ -107,16 +108,22 @@ export default{
             li.appendChild(h2);
             li.appendChild(textArea);
             li.appendChild(deleteButton);
-
+            console.log(target.parentElement);
+            console.log(target.parentElement.childNodes[3]);
+            target.parentElement.childNodes[3].childNodes[0].appendChild(li);
+            /*
+            console.log(this.ulArray);
             for(let ul of this.ulArray){
+                console.log(target.classList);
+                console.log(ul.classList)
                 if(target.classList[1] === ul.classList[1]){
                     ul.appendChild(li);
                 }
             }
+            */
     },
 
     deleteItem: function (target){
         target.currentTarget.parentNode.remove();
-         // måste fixa så att jag kan ta bort i modelen också
     }
 }
