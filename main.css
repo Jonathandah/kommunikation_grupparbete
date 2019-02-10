@@ -77,3 +77,23 @@ main{
 .inputhide {
   display:none;
 }
+
+.x {
+  position: relative;
+  text-align: right;
+}
+
+.newlist {
+    font-size: 14px;
+    margin-top: 4px;
+    background-color: white;
+    color:black;
+    border-style: none;
+    border-radius: 2px;
+    padding: 7px 8px 8px 8px;
+    box-shadow: 0 1px 2px 0 black;
+    width: 72px;
+    height: 30px;
+    cursor: pointer;
+
+}
