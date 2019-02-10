@@ -32,7 +32,8 @@ function handleDragOver(e) {
     // console.log(e.currentTarget);
     // e = vårt target
     console.log(e.target); //li
- 
+    e.target.setAttribute("style", "opacity: 1;");
+    e.target.classList.remove('over');
     this.appendChild(dragSrcEl);// = e.dataTransfer.getData('text/html');
     console.log(e.currentTarget);
   }
@@ -51,7 +52,7 @@ function handleTest(e){
     }
 
     model.idGenerater(listObject);
-    view.renderList(addList, listObject, view.container__input.value, handleDragOver, handleDrop);
+    view.renderList(main, addList, listObject, handleDragOver, handleDrop);
     model.array.push(listObject);
 }
 
@@ -61,6 +62,7 @@ inputtButton.addEventListener("click", addInput);
  */
 
 function addList (e){ // hanterar items
+  console.log(e.target.nextSibling);
     let itemValue = e.target.nextSibling.value; // borde denna selectas i controllern?
     console.log(itemValue);
     let listId = e.target.classList[1];

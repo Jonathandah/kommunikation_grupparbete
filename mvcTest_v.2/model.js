@@ -19,6 +19,7 @@ export default{
                 list.value.push(obj);
             }
         }
+        
 
         console.log(this.array);
     },
