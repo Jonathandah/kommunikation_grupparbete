@@ -35,8 +35,14 @@ function handleDragOver(e) {
     e.target.setAttribute("style", "opacity: 1;");
     e.target.classList.remove('over');
     this.appendChild(dragSrcEl);// = e.dataTransfer.getData('text/html');
+    console.log(this.classList[1]); // ulen vi släpper vårt item i
+    console.log(dragSrcEl);
+    console.log(dragSrcEl.id); // li måste ha sitt förstvarande object id och sen byta object id:et till det den släpps i !!!
+    console.log(dragSrcEl.parentNode);
     console.log(e.currentTarget);
+    model.findObj(dragSrcEl, this);
   }
+
 
   function handleDragEnd(e) {
     e.target.setAttribute("style", "opacity: 1;");
@@ -52,7 +58,7 @@ function handleTest(e){
     }
 
     model.idGenerater(listObject);
-    view.renderList(main, addList, listObject, handleDragOver, handleDrop);
+    view.renderList(main, addList, listObject, handleDragOver, handleDrop, deleteListObj);
     model.array.push(listObject);
 }
 
@@ -88,6 +94,12 @@ function addList (e){ // hanterar items
     //view.renderItem(model.findObj(listId), e.target, eraise);
 
     view.renderItem(object, e.target, eraise, handleDragStart, handleDragEnter, handleDragLeave, handleDragEnd);
+}
+
+function deleteListObj (e){
+  console.log(model.array);
+  model.deleteListObj(e.target.id); 
+  console.log(model.array);
 
 }
 
@@ -100,7 +112,7 @@ function eraise (e){
     view.renderItem(model.findObj(e.target.classList[1]), e.target, eraise, handleDragStart, handleDragEnter, handleDragLeave, handleDragEnd);
     //view.deleteItem(e);
     */
-   model.deleteObj(e.target.id, e.target.classList[1]);
+   model.deleteItemObj(e.target.id, e.target.classList[1]);
    console.log(e.currentTarget.parentNode.id);
    //view.renderItem(model.findObj(e.target.id), eraise);
    view.deleteItem(e);

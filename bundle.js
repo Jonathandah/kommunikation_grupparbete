@@ -4,15 +4,32 @@
     var model = {
         array:[],
 
-        findObj: function (target){
+        findObj: function (target, ulClass){
+            console.log(ulClass);
+            ulClass.classList;
+            console.log(JSON.stringify(this.array));
             console.log(target);
             for(let list of this.array){
-                console.log("Körs");
-                if(list.id === target){
-                    console.log(list);
-                    console.log(target);
-                    console.log("hittsde");
-                    return list;
+                console.log(list);
+                for(let item of list.value){
+                    console.log(item);
+                    if(target.id === item.id){
+                        console.log(target);
+                        console.log(item.id);
+                        for(let listObj of this.array){
+                            console.log(ulClass.class);
+                            console.log(listObj.id);
+                            if(ulClass.classList[1] === listObj.id){
+                                console.log("körs");
+                                console.log(item);
+                                item.class = listObj.id;
+                                ulClass.classList.remove[1];
+                                listObj.value.push(item);
+                            }
+                        }
+                        list.value.splice(item, 1); // måste flytta itemet innan jag tarbort det i nuvarande object
+                        console.log(this.array);
+                    }
                 }
             }
         },
@@ -22,6 +39,7 @@
                     list.value.push(obj);
                 }
             }
+            
 
             console.log(this.array);
         },
@@ -32,17 +50,24 @@
             let yyyy = today.getFullYear();
      
             let date = yyyy + "/" + mm + "/" + dd;
-                item.date = date;// vill man att nycklar ska vara beroende av varandra??
+            item.date = date;// vill man att nycklar ska vara beroende av varandra??
 
         },
 
         idGenerater: function(object){
-            let number = Math.floor(Math.random() * 1000);
-            object.id = number.toString();
+            let possible = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
+            let id = "";
+            for(let i = 0; i<=7; i++){
+                id += possible.charAt(Math.floor(Math.random() * possible.length));
+                console.log(id);
+            }
+            object.id = id;
+            
+            
             console.log(object);
         },
 
-        deleteObj: function(targetId, targetClass){
+        deleteItemObj: function(targetId, targetClass){
             console.log(targetClass);
             for(let obj in this.array){
                 if(targetClass === this.array[obj].id){
@@ -61,8 +86,17 @@
                     }
                 }
             }
-        }
+        },
 
+        deleteListObj: function(targetId){
+            console.log(targetId);
+            for(let obj of this.array){
+                console.log(obj.id);
+                if(targetId === obj.id){
+                    this.array.splice(obj, 1);
+                }
+            }
+        }
     };
 
     var view = {
@@ -80,7 +114,7 @@
             main.appendChild(addListButton);  
         },
 
-        renderList: function (main, addList , object, handleDragOver, handleDrop ){
+        renderList: function (main, addList , object, handleDragOver, handleDrop, deleteListObj){
             let div = document.createElement("div");
             let box = document.createElement('div');
             let x = document.createElement('button');
@@ -92,7 +126,9 @@
             //let input = document.createElement("input"); // fixa allt fix
             let addcart = document.createElement('button');
             savebt.innerHTML = "Save";
-          
+            let delX = document.createElement("btton");
+            delX.textContent = "x";
+            
           
             //input.classList.add("addItem__input"); //mins
             //input.classList.add(object.id); //mina
@@ -105,8 +141,9 @@
             box.classList.add(object.id); //min
             listinput.classList.add("input");
             savebt.classList.add("savebtn");
-            x.classList.add("delete-list-button");
-            x.classList.add("inputhide");
+            x.classList.add("x");
+            delX.classList.add("inputhide", "delX");
+            x.id = object.id;
             p.classList.add("inputhide");
             console.log(div);
           
@@ -120,24 +157,21 @@
             //ul.addEventListener("dragover", handleDragOver);
             //ul.addEventListener("drop", handleDrop);
 
-            addcart.classList.add("savebtn");
             addcart.classList.add("inputhide");
+            addcart.classList.add("Cartcss");
             addcart.classList.add(object.id);
-            addcart.innerHTML = "AddCart";
+            addcart.textContent= "Add Item";
 
             div.appendChild(box);
             box.appendChild(p);
             box.appendChild(listinput);
             box.appendChild(savebt);
             box.appendChild(x);
+            box.appendChild(delX);
             box.appendChild(addcart);
             //box.appendChild(ul);
             main.appendChild(div);
           
-          
-           
-
-
           
             savebt.addEventListener("click", function (e) {
               console.log(p);
@@ -146,7 +180,9 @@
               listinput.classList.add("inputhide");
               savebt.classList.add("inputhide");
               addcart.classList.remove("inputhide");
-              x.classList.remove("inputhide");
+              x.classList.add("inputhide");
+              delX.classList.remove("inputhide");
+
 
               let ul = document.createElement("ul");
               let input = document.createElement("input");
@@ -171,6 +207,11 @@
           
             x.addEventListener("click", function (e){
               div.parentElement.removeChild(div);
+            });
+            x.addEventListener("click", deleteListObj);
+
+            delX.addEventListener("click", function(){
+                div.parentElement.removeChild(div);
             });
           
             /*
@@ -230,6 +271,8 @@
                 deleteButton.classList.add(object.class);
                 h2.classList.add("itemTitle");
                 li.classList.add("item");
+                textArea.classList.add("textArea");
+                textArea.classList.add(object.class);
                 
 
                 h2.textContent = object.title + " - " + object.date;
@@ -248,7 +291,7 @@
                 li.appendChild(deleteButton);
                 console.log(target.parentElement);
                 console.log(target.parentElement.childNodes[3]);
-                target.parentElement.childNodes[6].appendChild(li);
+                target.parentElement.childNodes[7].appendChild(li);
                 /*
                 console.log(this.ulArray);
                 for(let ul of this.ulArray){
@@ -300,8 +343,14 @@
         e.target.setAttribute("style", "opacity: 1;");
         e.target.classList.remove('over');
         this.appendChild(dragSrcEl);// = e.dataTransfer.getData('text/html');
+        console.log(this.classList[1]); // ulen vi släpper vårt item i
+        console.log(dragSrcEl);
+        console.log(dragSrcEl.id); // li måste ha sitt förstvarande object id och sen byta object id:et till det den släpps i !!!
+        console.log(dragSrcEl.parentNode);
         console.log(e.currentTarget);
+        model.findObj(dragSrcEl, this);
       }
+
 
       function handleDragEnd(e) {
         e.target.setAttribute("style", "opacity: 1;");
@@ -317,7 +366,7 @@
         };
 
         model.idGenerater(listObject);
-        view.renderList(main, addList, listObject, handleDragOver, handleDrop);
+        view.renderList(main, addList, listObject, handleDragOver, handleDrop, deleteListObj);
         model.array.push(listObject);
     }
 
@@ -353,6 +402,12 @@
         //view.renderItem(model.findObj(listId), e.target, eraise);
 
         view.renderItem(object, e.target, eraise, handleDragStart, handleDragEnter, handleDragLeave, handleDragEnd);
+    }
+
+    function deleteListObj (e){
+      console.log(model.array);
+      model.deleteListObj(e.target.id); 
+      console.log(model.array);
 
     }
 
@@ -365,7 +420,7 @@
         view.renderItem(model.findObj(e.target.classList[1]), e.target, eraise, handleDragStart, handleDragEnter, handleDragLeave, handleDragEnd);
         //view.deleteItem(e);
         */
-       model.deleteObj(e.target.id, e.target.classList[1]);
+       model.deleteItemObj(e.target.id, e.target.classList[1]);
        console.log(e.currentTarget.parentNode.id);
        //view.renderItem(model.findObj(e.target.id), eraise);
        view.deleteItem(e);

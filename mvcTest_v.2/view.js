@@ -13,7 +13,7 @@ export default{
         main.appendChild(addListButton);  
     },
 
-    renderList: function (main, addList , object, handleDragOver, handleDrop ){
+    renderList: function (main, addList , object, handleDragOver, handleDrop, deleteListObj){
         let div = document.createElement("div");
         let box = document.createElement('div');
         let x = document.createElement('button');
@@ -25,7 +25,9 @@ export default{
         //let input = document.createElement("input"); // fixa allt fix
         let addcart = document.createElement('button');
         savebt.innerHTML = "Save";
-      
+        let delX = document.createElement("btton");
+        delX.textContent = "x";
+        
       
         //input.classList.add("addItem__input"); //mins
         //input.classList.add(object.id); //mina
@@ -38,8 +40,9 @@ export default{
         box.classList.add(object.id) //min
         listinput.classList.add("input");
         savebt.classList.add("savebtn");
-        x.classList.add("delete-list-button");
-        x.classList.add("inputhide");
+        x.classList.add("x");
+        delX.classList.add("inputhide", "delX");
+        x.id = object.id;
         p.classList.add("inputhide");
         console.log(div);
       
@@ -53,24 +56,21 @@ export default{
         //ul.addEventListener("dragover", handleDragOver);
         //ul.addEventListener("drop", handleDrop);
 
-        addcart.classList.add("savebtn");
         addcart.classList.add("inputhide");
+        addcart.classList.add("Cartcss");
         addcart.classList.add(object.id);
-        addcart.innerHTML = "AddCart"
+        addcart.textContent= "Add Item"
 
         div.appendChild(box);
         box.appendChild(p);
         box.appendChild(listinput);
         box.appendChild(savebt);
         box.appendChild(x);
+        box.appendChild(delX);
         box.appendChild(addcart);
         //box.appendChild(ul);
         main.appendChild(div);
       
-      
-       
-
-
       
         savebt.addEventListener("click", function (e) {
           console.log(p);
@@ -79,7 +79,9 @@ export default{
           listinput.classList.add("inputhide");
           savebt.classList.add("inputhide");
           addcart.classList.remove("inputhide");
-          x.classList.remove("inputhide");
+          x.classList.add("inputhide");
+          delX.classList.remove("inputhide");
+
 
           let ul = document.createElement("ul");
           let input = document.createElement("input");
@@ -104,7 +106,12 @@ export default{
       
         x.addEventListener("click", function (e){
           div.parentElement.removeChild(div);
-        })
+        });
+        x.addEventListener("click", deleteListObj);
+
+        delX.addEventListener("click", function(){
+            div.parentElement.removeChild(div);
+        });
       
         /*
         //let objId = target.parentElement.classList[1]; //list id
@@ -163,6 +170,8 @@ export default{
             deleteButton.classList.add(object.class);
             h2.classList.add("itemTitle");
             li.classList.add("item");
+            textArea.classList.add("textArea");
+            textArea.classList.add(object.class);
             
 
             h2.textContent = object.title + " - " + object.date;
@@ -181,7 +190,7 @@ export default{
             li.appendChild(deleteButton);
             console.log(target.parentElement);
             console.log(target.parentElement.childNodes[3]);
-            target.parentElement.childNodes[6].appendChild(li);
+            target.parentElement.childNodes[7].appendChild(li);
             /*
             console.log(this.ulArray);
             for(let ul of this.ulArray){
