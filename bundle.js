@@ -39,7 +39,7 @@
                     list.value.push(obj);
                 }
             }
-            
+
 
             console.log(this.array);
         },
@@ -48,7 +48,7 @@
             let dd = today.getDate();
             let mm = today.getMonth() + 1; //January is 0!
             let yyyy = today.getFullYear();
-     
+
             let date = yyyy + "/" + mm + "/" + dd;
             item.date = date;// vill man att nycklar ska vara beroende av varandra??
 
@@ -62,8 +62,8 @@
                 console.log(id);
             }
             object.id = id;
-            
-            
+
+
             console.log(object);
         },
 
@@ -106,12 +106,12 @@
         ulArray: [],
          // osöker på om den ska få sitt värde från modellen eller controllern !!
 
-        renderDom: function (main, testFunction){    
+        renderDom: function (main, testFunction){
             let addListButton = document.createElement("button");
             addListButton.classList.add("newlist");
             addListButton.addEventListener("click", testFunction);
             addListButton.textContent = "new List";
-            main.appendChild(addListButton);  
+            main.appendChild(addListButton);
         },
 
         renderList: function (main, addList , object, handleDragOver, handleDrop, deleteListObj){
@@ -128,8 +128,8 @@
             savebt.innerHTML = "Save";
             let delX = document.createElement("btton");
             delX.textContent = "x";
-            
-          
+
+
             //input.classList.add("addItem__input"); //mins
             //input.classList.add(object.id); //mina
             //ul.classList.add("itemList"); // mina
@@ -146,7 +146,7 @@
             x.id = object.id;
             p.classList.add("inputhide");
             console.log(div);
-          
+
             div.setAttribute("style", "display: grid");
             listinput.setAttribute("maxlength" , "29");
             //ul.setAttribute("style", "list-style: none;");
@@ -171,8 +171,8 @@
             box.appendChild(addcart);
             //box.appendChild(ul);
             main.appendChild(div);
-          
-          
+
+
             savebt.addEventListener("click", function (e) {
               console.log(p);
               p.classList.remove("inputhide");
@@ -190,7 +190,7 @@
               input.classList.add("addItem__input"); //mins
               input.classList.add(object.id); //mina // fixa allt fix
               ul.classList.add("itemList"); // mina
-              ul.classList.add(object.id); //mina  
+              ul.classList.add(object.id); //mina
 
               ul.setAttribute("style", "list-style: none;");
               input.setAttribute("maxlength", "17");
@@ -204,7 +204,7 @@
               console.log(p);
               console.log(e);
             });
-          
+
             x.addEventListener("click", function (e){
               div.parentElement.removeChild(div);
             });
@@ -213,7 +213,7 @@
             delX.addEventListener("click", function(){
                 div.parentElement.removeChild(div);
             });
-          
+
             /*
             //let objId = target.parentElement.classList[1]; //list id
             let h3 = document.createElement("h3");
@@ -237,7 +237,7 @@
             list.classList.add("list");
             ul.classList.add("itemList");
             ul.classList.add(object.id)
-            
+
             this.currentListArea = listArea
             this.ulArray.push(ul);
 
@@ -252,13 +252,13 @@
             listArea.appendChild(input);
             listArea.appendChild(list);
 
-        
+
             this.container__listbox.appendChild(listArea);
             */
         },
         renderItem: function(object, target, deleteFunction, handleDragStart, handleDragEnter, handleDragLeave, handleDragEnd){ //läger till items
                 console.log(object);
-                let li = document.createElement("li");  //styling för items 
+                let li = document.createElement("li");  //styling för items
                 let h2 = document.createElement("h2");
                 let deleteButton = document.createElement("button");
                 let textArea = document.createElement("textarea");
@@ -273,7 +273,7 @@
                 li.classList.add("item");
                 textArea.classList.add("textArea");
                 textArea.classList.add(object.class);
-                
+
 
                 h2.textContent = object.title + " - " + object.date;
                 deleteButton.textContent = "X";
@@ -285,7 +285,7 @@
                 li.addEventListener('dragenter', handleDragEnter);
                 li.addEventListener('dragleave', handleDragLeave);
                 li.addEventListener('dragend', handleDragEnd);
-                
+
                 li.appendChild(h2);
                 li.appendChild(textArea);
                 li.appendChild(deleteButton);
@@ -315,10 +315,10 @@
 
     let dragSrcEl = null;
     function handleDragStart(e) {
-        this.style.opacity = '0.4';  //elementet användaren håller i 
+        this.style.opacity = '0.4';  //elementet användaren håller i
         dragSrcEl = this;
       }
-      
+
 
     function handleDragOver(e) {
         if (e.preventDefault){
@@ -391,8 +391,8 @@
             date: undefined,
             value:undefined,
         };
-     
-        
+
+
         model.getDate(object);
         model.idGenerater(object);
         model.sortItems(object);
@@ -406,7 +406,7 @@
 
     function deleteListObj (e){
       console.log(model.array);
-      model.deleteListObj(e.target.id); 
+      model.deleteListObj(e.target.id);
       console.log(model.array);
 
     }
