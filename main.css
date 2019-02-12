@@ -6,17 +6,16 @@ html{
 
 body {
     background: rgba(0,0,0,.35);
-
-    background-size: 100% 100%;
+    background-size: 100%;
     background-image: url("blackboard.jpg");
-    height: 100vh;
+    height: 100%;
 }
 
 
 header {
   background: rgba(0,0,0,.35);
   width: 100%;
-  height: 60px;
+  height: 65px;
   opacity: 0.8;
 
 
@@ -100,8 +99,10 @@ main {
     left: 35px;
     top: 40px;
     margin-bottom: 20px;
-
+    
 }
+
+
 
 
 .newlist:hover{
@@ -271,7 +272,7 @@ li:hover{
     cursor: pointer;
 }
 li.over{
-    border: 2px dashed black;
+  color: rgba(8, 248, 100, 0.253);
 }
 
 h2 {
@@ -308,4 +309,40 @@ h2 {
   transition: all 300ms;
   font-size: 14px;
 
+}
+
+.popUp{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: #3a3a3aa8;
+  width: 400px;
+  height: 160px;
+
+  border-radius: 5px;
+}
+.popUp-buttons{
+  margin: 5px; 
+}
+.popUp-saveButton{
+  border-radius: 5px;
+  color: green;
+}
+
+.popUp-cancleButton{
+  border-radius: 5px;
+  color: red;
+}
+
+.popUp-background{
+  top: 0px;
+  background: rgba(0, 0, 0, 0);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

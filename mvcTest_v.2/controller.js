@@ -2,8 +2,9 @@ import model from "./model";
 import view from "./view";
 
 let main = document.querySelector("main");
+let body = document.querySelector("body");
 
-view.renderDom(main, handleTest); //test-version
+view.renderDom(main, newList); 
 
 let dragSrcEl = null;
 function handleDragStart(e) {
@@ -29,9 +30,7 @@ function handleDragOver(e) {
   }
 
   function handleDrop(e) {
-    // console.log(e.currentTarget);
-    // e = vårt target
-    console.log(e.target); //li
+    console.log(e.target); 
     e.target.setAttribute("style", "opacity: 1;");
     e.target.classList.remove('over');
     this.appendChild(dragSrcEl);// = e.dataTransfer.getData('text/html');
@@ -40,43 +39,35 @@ function handleDragOver(e) {
     console.log(dragSrcEl.id); // li måste ha sitt förstvarande object id och sen byta object id:et till det den släpps i !!!
     console.log(dragSrcEl.parentNode);
     console.log(e.currentTarget);
-    model.findObj(dragSrcEl, this);
+    model.findObj(dragSrcEl, this); //fick aldrig denna till att funka
   }
 
 
   function handleDragEnd(e) {
-    e.target.setAttribute("style", "opacity: 1;");
-    e.target.classList.remove('over');
+    let liArray = document.querySelectorAll(".item");
+    for(let li of liArray){
+      li.setAttribute("style", "opacity: 1;");
+      li.classList.remove('over');
+    }
   }
 
 
-function handleTest(e){
-
+function newList(e){
     let listObject = {
         id: undefined,
         value: [],
     }
 
     model.idGenerater(listObject);
-    view.renderList(main, addList, listObject, handleDragOver, handleDrop, deleteListObj);
+    view.renderList(main, newItem, listObject, handleDragOver, handleDrop, eraiseListObj);
     model.array.push(listObject);
 }
 
-/*
-let inputtButton = document.querySelector(".addItem");
-inputtButton.addEventListener("click", addInput);
- */
-
-function addList (e){ // hanterar items
-  console.log(e.target.nextSibling);
+function newItem (e){ // hanterar items
     let itemValue = e.target.nextSibling.value; // borde denna selectas i controllern?
-    console.log(itemValue);
-    let listId = e.target.classList[1];
+    let listId = e.target.classList[1]; // veet att det är extremt dåligt att andvända detta för ifall man lägger till en klass i elementet sabbas allt /mvh Jonatahan
 
-
-    console.log(listId);
-
-    let object = {
+    let itemObject = {
         class: listId,
         id: undefined,
         title: itemValue,
@@ -84,27 +75,29 @@ function addList (e){ // hanterar items
         value:undefined,
     }
  
-    
-    model.getDate(object);
-    model.idGenerater(object);
-    model.sortItems(object);
-
-    console.log("listId i addList-function " + listId);
-    //view.renderItem(model.findObj(listId), e.target, eraise); funkar inte längre??
-    //view.renderItem(model.findObj(listId), e.target, eraise);
-
-    view.renderItem(object, e.target, eraise, handleDragStart, handleDragEnter, handleDragLeave, handleDragEnd);
+    model.getDate(itemObject);
+    model.idGenerater(itemObject);
+    model.sortItems(itemObject);
+    view.renderItem(itemObject, e.target, eraise, handleDragStart, handleDragEnter, handleDragLeave, handleDragEnd, newEdit);
 }
 
-function deleteListObj (e){
+function newEdit(e){
+  console.log("hej");
+  view.editTitle(e.target, body, model.editItemObj(e.target), model.boolean);
+  
+  console.log(model.boolean)
+}
+
+function eraiseListObj (e){
   console.log(model.array);
   model.deleteListObj(e.target.id); 
   console.log(model.array);
-
 }
 
 
 function eraise (e){
+   // i detta fallet hade jag gärna velat radera mina items objekt och sen bara använda min render-metod igen, lyckades ej lösa det utan att sabba saker i koden // mvh jonathan
+
   /*
     model.deleteObj(e.target.id, e.target.classList[1]);
     console.log(e.target.id);
@@ -112,8 +105,7 @@ function eraise (e){
     view.renderItem(model.findObj(e.target.classList[1]), e.target, eraise, handleDragStart, handleDragEnter, handleDragLeave, handleDragEnd);
     //view.deleteItem(e);
     */
-   model.deleteItemObj(e.target.id, e.target.classList[1]);
-   console.log(e.currentTarget.parentNode.id);
-   //view.renderItem(model.findObj(e.target.id), eraise);
-   view.deleteItem(e);
+
+   model.deleteItemObj(e.target.id, e.target.classList[1]); //farligt //tar bort itemets objekt i modellen
+   view.deleteItem(e); // tar bort itemet i domen
 }

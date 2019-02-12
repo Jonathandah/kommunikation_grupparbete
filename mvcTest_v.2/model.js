@@ -1,6 +1,6 @@
 export default{
     array:[],
-
+    boolean: true,
     findObj: function (target, ulClass){
         console.log(ulClass);
         ulClass.classList
@@ -36,9 +36,6 @@ export default{
                 list.value.push(obj);
             }
         }
-        
-
-        console.log(this.array);
     },
     getDate: function(item){ //sätter datum
         let today = new Date();
@@ -50,35 +47,32 @@ export default{
         item.date = date;// vill man att nycklar ska vara beroende av varandra??
 
     },
-
+    editItemObj: function (target){
+        for(let listObj of this.array){
+            for(let itemObj of listObj.value){
+                if(itemObj.id === target.classList[1]){
+                   return itemObj
+                }
+            }
+        }
+    },
+    
     idGenerater: function(object){
         let possible = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890"
         let id = "";
         for(let i = 0; i<=7; i++){
             id += possible.charAt(Math.floor(Math.random() * possible.length));
-            console.log(id);
         }
         object.id = id;
-        
-        
-        console.log(object);
     },
 
     deleteItemObj: function(targetId, targetClass){
-        console.log(targetClass);
         for(let obj in this.array){
             if(targetClass === this.array[obj].id){
-                console.log(this.array[obj]);
                 let objArray = this.array[obj].value
-                console.log(objArray);
                 for(let item in objArray){
                     if(targetId === objArray[item].id){
-                        console.log(targetId);
-                        console.log(objArray[item]);
-                        console.log(objArray);
                         objArray.splice(item, 1);
-                        console.log(objArray);
-                        console.log(this.array);
                     }
                 }
             }
@@ -86,9 +80,7 @@ export default{
     },
 
     deleteListObj: function(targetId){
-        console.log(targetId);
         for(let obj of this.array){
-            console.log(obj.id)
             if(targetId === obj.id){
                 this.array.splice(obj, 1);
             }
